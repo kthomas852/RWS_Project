@@ -67,3 +67,5 @@ function businessInfoAJAX() {
 
 //Main program
 businessInfoAJAX();
+facebookAJAX();
+googleAJAX();
