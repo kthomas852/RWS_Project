@@ -5,14 +5,33 @@ function facebookAJAX() {
     $.ajax({
     cache:false,
     type: 'POST',
-    url: 'https://jsfiddle.net/averygonzalesrws/ntwq619d/echo/json/',
+    url: '/echo/json/',
     data: {
         json:JSON.stringify(json)
     },
     success: function(data) {  
         setTimeout(function() {
         //run code here
-        console.log(data);
+        console.log("running");
+        let goto = data.individual_placement_performances
+        console.log(goto[0].placement_description);
+        for (i = 0; i < goto.length; i++) {
+            let div = $('<div>').addClass('Ads');
+            let adName = $('<h3>').text(goto[0].placement_description);
+            let id = $('<p>').text("Ad Id:  " + goto[i].placement_id);
+            let type = $('<p>').text("Ad Type:  " + goto[i].placement_type_name);
+            let impressions = $('<p>').text("Impressions:  " + goto[i].impressions);
+            let reach = $('<p>').text("Reach:  " + goto[i].reach);
+            let clicks = $('<p>').text("Clciks:  " + goto[i].clicks);
+            let ctr = $('<p>').text("Click Through Rate:  " + goto[i].click_through_rate_as_percentage);
+            let postEng = $('<p>').text("Engagements:  " + goto[i].post_engagements);
+            let cppe = $('<p>').text("Cost per Engagement:  " + goto[i].cost_per_post_engagements);
+            let cpc = $('<p>').text("Cost per Click:  " + goto[i].cost_per_click);
+            let total = $('<h4>').text("Total Cost:  " + goto[i].cost);
+            div.append(adName, id, type, impressions, clicks, reach, ctr, cpc, postEng, cppe, total);
+            $('#facebook').append(div);
+            console.log("FB here: " + ctr);
+        };
                     }, 5000);
     },
     error:function(error){
@@ -34,7 +53,23 @@ function googleAJAX() {
     success: function(data) {
     setTimeout(function() {
     //run code here
-    console.log(data);
+    let goto = data.individual_placement_performances;
+    console.log(goto[0].placement_description);
+        for (i = 0; i < goto.length; i++) {
+            let div = $('<div>').addClass('Ads');
+            let adName = $('<h3>').text(goto[i].placement_description);
+            let id = $('<p>').text("Ad Id:  " + goto[i].placement_id);
+            let type = $('<p>').text("Ad Type:  " + goto[i].placement_type_name);
+            let impressions = $('<p>').text("Impressions:  " + goto[i].impressions);
+            let reach = $('<p>').text("Reach:  " + goto[i].reach);
+            let clicks = $('<p>').text("Clicks:  " + goto[i].clicks);
+            let ctr = $('<p>').text("Click Through Rate:  " + goto[i].click_through_rate_as_percentage);
+            let cpc = $('<p>').text("Cost per Click:  " + goto[i].cost_per_click);
+            let total = $('<h4>').text("Total Cost:  " + goto[i].cost);
+            div.append(adName, id, type, impressions, clicks, reach, ctr, cpc, total);
+            $('#google').append(div);
+            console.log("Div here:" + adName);
+        };
                 }, 100);
     },
     error:function(error){
@@ -49,14 +84,17 @@ function businessInfoAJAX() {
     $.ajax({
     cache:false,
     type: 'POST',
-    url: '/echo/jsonp/',
+    url: '/echo/json/',
     data: {
         json:JSON.stringify(json)
     },
     success: function(data) { 
     setTimeout(function() {
     //run code here
-    console.log(data);
+    let name = $('<span>').text(data.business_name).addClass('bizName');
+    //let image= "<img src=" + data.business_image_src + ">";
+    $('#biz').append(name);
+    $('#logo').attr('src', data.business_image_src);
                 }, 200);        
     },
     error:function(error){
@@ -67,5 +105,5 @@ function businessInfoAJAX() {
 
 //Main program
 businessInfoAJAX();
-facebookAJAX();
 googleAJAX();
+facebookAJAX();

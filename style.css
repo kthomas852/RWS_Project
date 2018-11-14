@@ -1,0 +1,31 @@
+.fbDIV {
+  
+}
+
+#logo {
+  height: 110px;
+  width: 150 px;
+}
+
+.bizName {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.biz {
+  margin-left: 20%;
+}
+
+.Ads {
+  width: 55%;
+  background-color: whitesmoke;
+  margin-top: 20px;
+  margin-left: 100px;
+  padding: 10px;
+}
+
+.displays {
+  border: 3px solid black;
+  margin: 20px;
+  background-color: #D3D3D3;
+}
